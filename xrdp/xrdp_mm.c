@@ -102,6 +102,9 @@ xrdp_mm_sync_load(long param1, long param2)
 static void
 xrdp_mm_module_cleanup(struct xrdp_mm *self)
 {
+
+    int pid, uid, gid, my_pid, display, screen;
+
     log_message(LOG_LEVEL_DEBUG, "xrdp_mm_module_cleanup");
 
     if (self->mod != 0)
@@ -113,6 +116,22 @@ xrdp_mm_module_cleanup(struct xrdp_mm *self)
         }
     }
 
+    if(self->chan_trans !=0){
+        if (g_sck_get_peer_cred(self->chan_trans->sck, &pid, &uid, &gid)==0)
+        {
+            log_message(LOG_LEVEL_DEBUG, "xrdp_mm_module_cleanup: got peer_cred");
+
+            my_pid=g_getpid();
+            display = self->display;
+            screen = self->wm->screen->id;
+            log_message(LOG_LEVEL_INFO, "xrdp_mm_module_cleanup: xrdp_pid=%d disconnected xrdp-chansrv=%d X11rdp_uid=%d X11rdp_gid=%d client_ip=%s client_port=%s display=%d screen=%d",
+            my_pid, pid, uid, gid, self->wm->session->client_info->client_addr, self->wm->session->client_info->client_port, display, screen );
+        }else{
+            log_message(LOG_LEVEL_ERROR, "xrdp_mm_module_cleanup: g_sck_get_peer_cred failed");
+        }
+        
+
+    }
     if (self->mod_handle != 0)
     {
         /* Let the main thread unload the module.*/
