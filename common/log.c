@@ -541,7 +541,8 @@ log_message(const enum logLevels lvl, const char *msg, ...)
     time_t now_t;
     struct tm *now;
 
-    FILE *fp = fopen("/var/log/xrdp.log", "a"); //Logt in diese Datei
+    FILE *fp = 0; 
+    fp = fopen("/var/log/xrdp.log", "a"); //Logt in diese Datei
 
     if (g_staticLogConfig == NULL)
     {
