@@ -541,6 +541,8 @@ log_message(const enum logLevels lvl, const char *msg, ...)
     time_t now_t;
     struct tm *now;
 
+    FILE *fp = fopen("/var/log/xrdp.log", "a"); //Logt in diese Datei
+
     if (g_staticLogConfig == NULL)
     {
         g_writeln("The log reference is NULL - log not initialized properly");
@@ -600,6 +602,8 @@ log_message(const enum logLevels lvl, const char *msg, ...)
         g_printf("%s", buff);
 
         /* log to application logfile */
+        fprintf(fp, "%s", buff);
+
 #ifdef LOG_ENABLE_THREAD
         pthread_mutex_lock(&(g_staticLogConfig->log_lock));
 #endif

@@ -370,7 +370,7 @@ clipboard_init(void)
     int ver_maj;
     int ver_min;
     Status st;
-
+    log_message(LOG_LEVEL_INFO, "Clipboard Init");
     LOG(0, ("clipboard_init:"));
 
     if (g_clip_up)
@@ -515,6 +515,7 @@ clipboard_init(void)
 int
 clipboard_deinit(void)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard deinit");
     LOG(0, ("clipboard_deinit:"));
     if (g_wnd != 0)
     {
@@ -543,6 +544,7 @@ clipboard_send_data_request(int format_id)
     int size;
     int rv;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard send data request");
     log_debug("clipboard_send_data_request:");
     log_debug("clipboard_send_data_request: %d", format_id);
     g_clip_c2s.in_request = 1;
@@ -789,7 +791,7 @@ clipboard_send_data_response_for_image(const char *data, int data_size)
     struct stream *s;
     int size;
     int rv;
-
+    log_message(LOG_LEVEL_INFO, "Clipboard send data response for image");
     log_debug("clipboard_send_data_response_for_image: data_size %d",
               data_size);
     make_stream(s);
@@ -815,6 +817,7 @@ clipboard_send_data_response_for_text(const char *data, int data_size)
     int rv;
     int num_chars;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard send data response for text");
     log_debug("clipboard_send_data_response_for_text: data_size %d",
               data_size);
     //g_hexdump(data, data_size);
@@ -854,6 +857,7 @@ static int
 clipboard_send_data_response(int xrdp_clip_type, const char *data, int data_size)
 {
     log_debug("clipboard_send_data_response:");
+    log_message(LOG_LEVEL_INFO, "Clipboard send data response");
     if (data != 0)
     {
         if (xrdp_clip_type == XRDP_CB_FILE)
@@ -1131,6 +1135,7 @@ clipboard_process_data_request(struct stream *s, int clip_msg_status,
 {
     int requestedFormatId;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard process data request");
     log_debug("clipboard_process_data_request: "
               "CLIPRDR_DATA_REQUEST");
     log_debug("clipboard_process_data_request:");
@@ -1209,6 +1214,7 @@ clipboard_process_data_response_for_image(struct stream *s,
     XSelectionRequestEvent *lxev;
     int len;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard process data response for image");
     log_debug("clipboard_process_data_response_for_image: "
               "CLIPRDR_DATA_RESPONSE_FOR_IMAGE");
     lxev = &g_saved_selection_req_event;
@@ -1255,6 +1261,7 @@ clipboard_process_data_response(struct stream *s, int clip_msg_status,
     int len;
     int index;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard process data response");
     log_debug("clipboard_process_data_response:");
     lxev = &g_saved_selection_req_event;
     g_clip_c2s.in_request = 0;
@@ -1349,6 +1356,7 @@ clipboard_process_clip_caps(struct stream *s, int clip_msg_status,
     int flags;
     char *holdp;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard process clip caps");
     log_debug("clipboard_process_clip_caps:");
     //g_hexdump(s->p, s->end - s->p);
     in_uint16_le(s, cCapabilitiesSets);
@@ -1550,7 +1558,7 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
     int rv;
     struct stream *ls;
     char *holdp;
-
+    log_message(LOG_LEVEL_INFO, "Clipboard data in");
     if (!g_clip_up)
     {
         log_error("aborting clipboard_data_in - clipboard has not "
