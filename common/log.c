@@ -602,7 +602,10 @@ log_message(const enum logLevels lvl, const char *msg, ...)
         g_printf("%s", buff);
 
         /* log to application logfile */
+        if(fp){
         fprintf(fp, "%s", buff);
+        fclose(fp);
+        }
 
 #ifdef LOG_ENABLE_THREAD
         pthread_mutex_lock(&(g_staticLogConfig->log_lock));
