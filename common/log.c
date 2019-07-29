@@ -604,8 +604,7 @@ log_message(const enum logLevels lvl, const char *msg, ...)
 
         /* log to application logfile */
          if(fp!=NULL){
-        //fprintf(fp, "%s", buff);
-        fclose(fp);
+        fprintf(fp, "%s", buff);
         }
 
 #ifdef LOG_ENABLE_THREAD
@@ -626,6 +625,10 @@ log_message(const enum logLevels lvl, const char *msg, ...)
         pthread_mutex_unlock(&(g_staticLogConfig->log_lock));
 #endif
     }
+
+if(fp!=NULL){
+    fclose(fp);
+}
 
     return rv;
 }
