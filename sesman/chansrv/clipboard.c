@@ -545,9 +545,9 @@ clipboard_send_data_request(int format_id)
     int rv;
 
     char logMessage[500]={"Clipboard send data request: format_id="};
-    strcat(logMessage, format_id);
+    strcat(logMessage, "%d",format_id);
     log_message(LOG_LEVEL_INFO,  logMessage);
-    
+
     log_debug("clipboard_send_data_request:");
     log_debug("clipboard_send_data_request: %d", format_id);
     g_clip_c2s.in_request = 1;
@@ -621,7 +621,7 @@ clipboard_out_unicode(struct stream *s, const char *text, int num_chars)
         index++;
     }
     char logMessage[500]={"Clipboard data out: "};
-    strcat(logMessage, index);
+    strcat(logMessage, "%d", index);
     strcat(logMessage, " zeichen");
     log_message(LOG_LEVEL_INFO, logMessage);
 
@@ -656,7 +656,7 @@ clipboard_in_unicode(struct stream *s, char *text, int *num_chars)
             break;
         }
     }   char logMessage[500]={"Clipboard data in unicode: "};
-        strcat(logMessage, index);
+        strcat(logMessage, "%d", index);
         strcat(logMessage, " zeichen");
         log_message(LOG_LEVEL_INFO, logMessage  );
 
@@ -803,7 +803,7 @@ clipboard_send_data_response_for_image(const char *data, int data_size)
     int rv;
 
     char logMessage[500]={"Clipboard send data response for image: data_size="};
-    strcat(logMessage, data_size);
+    strcat(logMessage, "%d", data_size);
     log_message(LOG_LEVEL_INFO,  logMessage );
     log_debug("clipboard_send_data_response_for_image: data_size %d",
               data_size);
@@ -830,7 +830,7 @@ clipboard_send_data_response_for_text(const char *data, int data_size)
     int rv;
     int num_chars;
     char logMessage[500]={"Clipboard send data response for text: data_size="};
-    strcat(logMessage, data_size);
+    strcat(logMessage, "%d", data_size);
     log_message(LOG_LEVEL_INFO,  logMessage);
     log_debug("clipboard_send_data_response_for_text: data_size %d",
               data_size);
@@ -872,7 +872,7 @@ clipboard_send_data_response(int xrdp_clip_type, const char *data, int data_size
 {
 
     char logMessage[500]={"Clipboard send data response: data_size="};
-    strcat(logMessage, data_size);
+    strcat(logMessage, "%d", data_size);
     log_debug(logMessage);
     log_message(LOG_LEVEL_INFO, logMessage );
 
@@ -1153,7 +1153,7 @@ clipboard_process_data_request(struct stream *s, int clip_msg_status,
 {
     int requestedFormatId;
     char logMessage[500]={"Clipboard process data request: clip_msg_len="};
-    strcat(logMessage, clip_msg_len);
+    strcat(logMessage, "%d", clip_msg_len);
     log_message(LOG_LEVEL_INFO, logMessage);
 
     log_debug("clipboard_process_data_request: "
@@ -1235,7 +1235,7 @@ clipboard_process_data_response_for_image(struct stream *s,
     int len;
 
     char logMessage[500]={"Clipboard process data response for image: clip_msg_len="};
-    strcat(logMessage, clip_msg_len);
+    strcat(logMessage, "%d", clip_msg_len);
     log_message(LOG_LEVEL_INFO,  logMessage);
 
     log_debug("clipboard_process_data_response_for_image: "
@@ -1285,7 +1285,7 @@ clipboard_process_data_response(struct stream *s, int clip_msg_status,
     int index;
 
     char logMessage[500]={"Clipboard process data response: clip_msg_len="};
-    strcat(logMessage, clip_msg_len);
+    strcat(logMessage, "%d", clip_msg_len);
     log_message(LOG_LEVEL_INFO,  logMessage);
     log_debug("clipboard_process_data_response:");
     lxev = &g_saved_selection_req_event;
@@ -1382,7 +1382,7 @@ clipboard_process_clip_caps(struct stream *s, int clip_msg_status,
     char *holdp;
 
     char logMessage[500]={"Clipboard process clip caps: clip_msg_len="};
-    strcat(logMessage, clip_msg_len);
+    strcat(logMessage, "%d", clip_msg_len);
     log_message(LOG_LEVEL_INFO, logMessage);
 
     log_debug("clipboard_process_clip_caps:");
@@ -1588,7 +1588,7 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
     char *holdp;
 
     char logMessage[500]={"Clipboard data in: length="};
-    strcat(logMessage, length);
+    strcat(logMessage, "%d", length);
     log_message(LOG_LEVEL_INFO,  logMessage);
 
     if (!g_clip_up)
