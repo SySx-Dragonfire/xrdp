@@ -623,7 +623,7 @@ clipboard_out_unicode(struct stream *s, const char *text, int num_chars)
     //char logMessage[500]={"Clipboard data out: "};
     //strcat(logMessage, "%d", index);
     //strcat(logMessage, " zeichen");
-    log_message(LOG_LEVEL_INFO, "Clipboard data out %d zeichen", index);
+    log_message(LOG_LEVEL_INFO, "Clipboard data out %d zeichen", num_chars);
 
     g_free(ltext);
     return index * 2;
@@ -1589,7 +1589,7 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
 
     /*char logMessage[500]={"Clipboard data in: length="};
     strcat(logMessage, "%d", length);*/
-    log_message(LOG_LEVEL_INFO,  "Clipboard data in: length=%d", length);
+    log_message(LOG_LEVEL_INFO,  "Clipboard data in: ltotal_ength=%d", total_length);
 
     if (!g_clip_up)
     {
