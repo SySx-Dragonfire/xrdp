@@ -1665,7 +1665,7 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
 
     int zaehler=0;
     while(s->data[zaehler++]){ }
-    log_message(LOG_LEVEL_INFO,  "Clipboard data in: zaehler",    zaehler);
+    log_message(LOG_LEVEL_INFO,  "Clipboard data in: zaehler=%d",    zaehler);
     rv = 0;
 
     log_debug("clipboard_data_in: %d", clip_msg_id);
