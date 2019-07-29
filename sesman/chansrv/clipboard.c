@@ -294,6 +294,8 @@ get_atom_text(Atom atom)
     char *name;
     int failed;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard get_atom_text");
+
     failed = 0;
     /* sanity check */
     if ((atom < 1) || (atom > 512))
@@ -326,6 +328,8 @@ clipboard_get_server_time(void)
     XEvent xevent;
     unsigned char no_text[4];
 
+    log_message(LOG_LEVEL_INFO, "Clipboard get Server time");
+
     /* append nothing */
     no_text[0] = 0;
     XChangeProperty(g_display, g_wnd, g_get_time_atom, XA_STRING, 8,
@@ -345,6 +349,7 @@ clipboard_get_server_time(void)
 static int
 clipboard_find_format_id(int format_id)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard find format id");
     int index;
 
     for (index = 0; index < g_num_formatIds; index++)
@@ -571,6 +576,7 @@ clipboard_send_data_request(int format_id)
 static int
 clipboard_send_format_ack(void)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard send format ack");
     struct stream *s;
     int size;
     int rv;
@@ -675,6 +681,7 @@ static char windows_native_format[] =
 static int
 clipboard_send_format_announce(int xrdp_clip_type)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard send format announce");
     struct stream *s;
     int size;
     int rv;
@@ -907,6 +914,8 @@ clipboard_set_selection_owner(void)
 {
     Window owner;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard set selection owner");
+
     log_debug("clipboard_set_selection_owner:");
     g_selection_time = clipboard_get_server_time();
     XSetSelectionOwner(g_display, g_clipboard_atom, g_wnd, g_selection_time);
@@ -926,6 +935,7 @@ clipboard_set_selection_owner(void)
 static int
 clipboard_provide_selection_c2s(XSelectionRequestEvent *req, Atom type)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard provide selection c2s");
     XEvent xev;
     long val1[2];
 
@@ -983,6 +993,8 @@ static int
 clipboard_provide_selection(XSelectionRequestEvent *req, Atom type, int format,
                             char *data, int length)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard provide selection");
+
     XEvent xev;
     int bytes;
 
@@ -1012,6 +1024,7 @@ clipboard_provide_selection(XSelectionRequestEvent *req, Atom type, int format,
 static int
 clipboard_refuse_selection(XSelectionRequestEvent *req)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard refuse selection");
     XEvent xev;
 
     g_memset(&xev, 0, sizeof(xev));
@@ -1035,6 +1048,7 @@ static int
 clipboard_process_format_announce(struct stream *s, int clip_msg_status,
                                   int clip_msg_len)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard process format announce");
     int formatId;
     int count;
     int bytes;
@@ -1115,6 +1129,8 @@ static int
 clipboard_process_format_ack(struct stream *s, int clip_msg_status,
                              int clip_msg_len)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard process format ack");
+
     log_debug("clipboard_process_format_ack: CLIPRDR_FORMAT_ACK");
     log_debug("clipboard_process_format_ack:");
     return 0;
@@ -1127,7 +1143,7 @@ clipboard_send_data_response_failed(void)
     struct stream *s;
     int size;
     int rv;
-
+    log_message(LOG_LEVEL_INFO, "Clipboard send data response failed");
     log_error("clipboard_send_data_response_failed:");
     make_stream(s);
     init_stream(s, 64);
@@ -1425,6 +1441,8 @@ ss_part(char *data, int data_bytes)
     int index;
     char *text;
 
+    log_message(LOG_LEVEL_INFO, "Clipboard ss_part");
+
     log_debug("ss_part: data_bytes %d read_bytes_done %d "
               "incr_bytes_done %d", data_bytes,
               g_clip_c2s.read_bytes_done,
@@ -1479,6 +1497,7 @@ ss_part(char *data, int data_bytes)
 static int
 ss_end(void)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard ss_end");
     char *data;
     int data_bytes;
 
@@ -1514,6 +1533,7 @@ ss_end(void)
 static int
 ss_start(char *data, int data_bytes, int total_bytes)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard ss_start");
     XEvent xev;
     XSelectionRequestEvent *req;
     long val1[2];
@@ -1741,6 +1761,7 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
 static int
 clipboard_event_selection_owner_notify(XEvent *xevent)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard event selection owner notify");
     XFixesSelectionNotifyEvent *lxevent;
 
     lxevent = (XFixesSelectionNotifyEvent *)xevent;
@@ -1775,6 +1796,7 @@ static int
 clipboard_get_window_property(Window wnd, Atom prop, Atom *type, int *fmt,
                               int *n_items, char **xdata, int *xdata_size)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard get window property");
     int lfmt;
     int lxdata_size;
     unsigned long ln_items;
@@ -1882,6 +1904,8 @@ clipboard_get_window_property(Window wnd, Atom prop, Atom *type, int *fmt,
 static int
 clipboard_event_selection_notify(XEvent *xevent)
 {
+log_message(LOG_LEVEL_INFO, "Clipboard event selection notify");
+
     XSelectionEvent *lxevent;
     char *data;
     int data_size;
@@ -2177,6 +2201,8 @@ clipboard_event_selection_notify(XEvent *xevent)
 static int
 clipboard_event_selection_request(XEvent *xevent)
 {
+log_message(LOG_LEVEL_INFO, "Clipboard event selection request");
+
     XSelectionRequestEvent *lxev;
     Atom atom_buf[10];
     Atom type;
@@ -2344,6 +2370,7 @@ clipboard_event_selection_request(XEvent *xevent)
 static int
 clipboard_event_selection_clear(XEvent *xevent)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard event selection clear");
     log_debug("clipboard_event_selection_clear:");
     return 0;
 }
@@ -2363,6 +2390,7 @@ clipboard_event_selection_clear(XEvent *xevent)
 static int
 clipboard_event_property_notify(XEvent *xevent)
 {
+    log_message(LOG_LEVEL_INFO, "Clipboard event property notify");
     Atom actual_type_return;
     int actual_format_return;
     unsigned long nitems_returned;
@@ -2526,6 +2554,8 @@ clipboard_event_property_notify(XEvent *xevent)
 int
 clipboard_xevent(void *xevent)
 {
+log_message(LOG_LEVEL_INFO, "Clipboard xevent");
+
     XEvent *lxevent;
 
     log_debug("clipboard_xevent: event detected");
