@@ -603,8 +603,8 @@ log_message(const enum logLevels lvl, const char *msg, ...)
         g_printf("%s", buff);
 
         /* log to application logfile */
-        if(fp!=NULL){
-        fprintf(fp, "%s", buff);
+         if(fp!=NULL){
+        //fprintf(fp, "%s", buff);
         fclose(fp);
         }
 
