@@ -1584,10 +1584,9 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
     int rv;
     struct stream *ls;
     char *holdp;
-
     /*char logMessage[500]={"Clipboard data in: length="};
     strcat(logMessage, "%d", length);*/
-    log_message(LOG_LEVEL_INFO,  "Clipboard data in: length=%d total_length=%d g_ins->size=%d",length, total_length, g_ins->size);
+    log_message(LOG_LEVEL_INFO,  "Clipboard data in: size=%d",    s->size);
 
     if (!g_clip_up)
     {
