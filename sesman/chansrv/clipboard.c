@@ -544,9 +544,9 @@ clipboard_send_data_request(int format_id)
     int size;
     int rv;
 
-    char logMessage[500]={"Clipboard send data request: format_id="};
-    strcat(logMessage, "%d",format_id);
-    log_message(LOG_LEVEL_INFO,  logMessage);
+    /*char logMessage[500]={};
+    strcat(logMessage, "%d",format_id);*/
+    log_message(LOG_LEVEL_INFO,  "Clipboard send data request: format_id=%d", format_id);
 
     log_debug("clipboard_send_data_request:");
     log_debug("clipboard_send_data_request: %d", format_id);
@@ -620,10 +620,10 @@ clipboard_out_unicode(struct stream *s, const char *text, int num_chars)
         out_uint16_le(s, ltext[index]);
         index++;
     }
-    char logMessage[500]={"Clipboard data out: "};
-    strcat(logMessage, "%d", index);
-    strcat(logMessage, " zeichen");
-    log_message(LOG_LEVEL_INFO, logMessage);
+    //char logMessage[500]={"Clipboard data out: "};
+    //strcat(logMessage, "%d", index);
+    //strcat(logMessage, " zeichen");
+    log_message(LOG_LEVEL_INFO, "Clipboard data out %d zeichen", index);
 
     g_free(ltext);
     return index * 2;
@@ -655,10 +655,10 @@ clipboard_in_unicode(struct stream *s, char *text, int *num_chars)
         {
             break;
         }
-    }   char logMessage[500]={"Clipboard data in unicode: "};
+    }   /* char logMessage[500]={"Clipboard data in unicode: "};
         strcat(logMessage, "%d", index);
-        strcat(logMessage, " zeichen");
-        log_message(LOG_LEVEL_INFO, logMessage  );
+        strcat(logMessage, " zeichen");*/
+        log_message(LOG_LEVEL_INFO, "Clipboard data in inicode: %d", index  );
 
     *num_chars = g_wcstombs(text, ltext, *num_chars);
     g_free(ltext);
@@ -802,9 +802,9 @@ clipboard_send_data_response_for_image(const char *data, int data_size)
     int size;
     int rv;
 
-    char logMessage[500]={"Clipboard send data response for image: data_size="};
-    strcat(logMessage, "%d", data_size);
-    log_message(LOG_LEVEL_INFO,  logMessage );
+    /*char logMessage[500]={"Clipboard send data response for image: data_size="};
+    strcat(logMessage, "%d", data_size);*/
+    log_message(LOG_LEVEL_INFO,  "Clipboard send data response for image: data_size=%d", data_size );
     log_debug("clipboard_send_data_response_for_image: data_size %d",
               data_size);
     make_stream(s);
@@ -829,9 +829,9 @@ clipboard_send_data_response_for_text(const char *data, int data_size)
     int size;
     int rv;
     int num_chars;
-    char logMessage[500]={"Clipboard send data response for text: data_size="};
-    strcat(logMessage, "%d", data_size);
-    log_message(LOG_LEVEL_INFO,  logMessage);
+    /*char logMessage[500]={"Clipboard send data response for text: data_size="};
+    strcat(logMessage, "%d", data_size);*/
+    log_message(LOG_LEVEL_INFO,  "Clipboard send data response for text: data_size=%d", data_size);
     log_debug("clipboard_send_data_response_for_text: data_size %d",
               data_size);
     //g_hexdump(data, data_size);
@@ -871,10 +871,10 @@ static int
 clipboard_send_data_response(int xrdp_clip_type, const char *data, int data_size)
 {
 
-    char logMessage[500]={"Clipboard send data response: data_size="};
+    /* char logMessage[500]={"Clipboard send data response: data_size="};
     strcat(logMessage, "%d", data_size);
-    log_debug(logMessage);
-    log_message(LOG_LEVEL_INFO, logMessage );
+    log_debug(logMessage);*/
+    log_message(LOG_LEVEL_INFO, "Clipboard send data response: data_size=%d", data_size );
 
     if (data != 0)
     {
@@ -1152,9 +1152,9 @@ clipboard_process_data_request(struct stream *s, int clip_msg_status,
                                int clip_msg_len)
 {
     int requestedFormatId;
-    char logMessage[500]={"Clipboard process data request: clip_msg_len="};
-    strcat(logMessage, "%d", clip_msg_len);
-    log_message(LOG_LEVEL_INFO, logMessage);
+    /*char logMessage[500]={"Clipboard process data request: clip_msg_len="};
+    strcat(logMessage, "%d", clip_msg_len);*/
+    log_message(LOG_LEVEL_INFO, "Clipboard process data request: clip_msg_len=%d", clip_msg_len);
 
     log_debug("clipboard_process_data_request: "
               "CLIPRDR_DATA_REQUEST");
@@ -1234,9 +1234,9 @@ clipboard_process_data_response_for_image(struct stream *s,
     XSelectionRequestEvent *lxev;
     int len;
 
-    char logMessage[500]={"Clipboard process data response for image: clip_msg_len="};
-    strcat(logMessage, "%d", clip_msg_len);
-    log_message(LOG_LEVEL_INFO,  logMessage);
+    /*char logMessage[500]={"Clipboard process data response for image: clip_msg_len="};
+    strcat(logMessage, "%d", clip_msg_len);*/
+    log_message(LOG_LEVEL_INFO,  "Clipboard process data response for image: clip_msg_len=%d", clip_msg_len);
 
     log_debug("clipboard_process_data_response_for_image: "
               "CLIPRDR_DATA_RESPONSE_FOR_IMAGE");
@@ -1284,9 +1284,9 @@ clipboard_process_data_response(struct stream *s, int clip_msg_status,
     int len;
     int index;
 
-    char logMessage[500]={"Clipboard process data response: clip_msg_len="};
-    strcat(logMessage, "%d", clip_msg_len);
-    log_message(LOG_LEVEL_INFO,  logMessage);
+    /*char logMessage[500]={"Clipboard process data response: clip_msg_len="};
+    strcat(logMessage, "%d", clip_msg_len);*/
+    log_message(LOG_LEVEL_INFO,  "Clipboard process data response: clip_msg_len=%d", clip_msg_len);
     log_debug("clipboard_process_data_response:");
     lxev = &g_saved_selection_req_event;
     g_clip_c2s.in_request = 0;
@@ -1381,9 +1381,9 @@ clipboard_process_clip_caps(struct stream *s, int clip_msg_status,
     int flags;
     char *holdp;
 
-    char logMessage[500]={"Clipboard process clip caps: clip_msg_len="};
-    strcat(logMessage, "%d", clip_msg_len);
-    log_message(LOG_LEVEL_INFO, logMessage);
+    /*char logMessage[500]={"Clipboard process clip caps: clip_msg_len="};
+    strcat(logMessage, "%d", clip_msg_len);*/
+    log_message(LOG_LEVEL_INFO, "Clipboard process clip caps: clip_msg_len=%d", clip_msg_len);
 
     log_debug("clipboard_process_clip_caps:");
     //g_hexdump(s->p, s->end - s->p);
@@ -1587,9 +1587,9 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
     struct stream *ls;
     char *holdp;
 
-    char logMessage[500]={"Clipboard data in: length="};
-    strcat(logMessage, "%d", length);
-    log_message(LOG_LEVEL_INFO,  logMessage);
+    /*char logMessage[500]={"Clipboard data in: length="};
+    strcat(logMessage, "%d", length);*/
+    log_message(LOG_LEVEL_INFO,  "Clipboard data in: length=%d", length);
 
     if (!g_clip_up)
     {
