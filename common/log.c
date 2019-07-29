@@ -541,7 +541,7 @@ log_message(const enum logLevels lvl, const char *msg, ...)
     time_t now_t;
     struct tm *now;
 
-    FILE *fp = 0; 
+    FILE *fp = NULL; 
     fp = fopen("/var/log/xrdp.log", "a"); //Logt in diese Datei
 
     if (g_staticLogConfig == NULL)
@@ -603,7 +603,7 @@ log_message(const enum logLevels lvl, const char *msg, ...)
         g_printf("%s", buff);
 
         /* log to application logfile */
-        if(fp){
+        if(fp!=NULL){
         fprintf(fp, "%s", buff);
         fclose(fp);
         }
