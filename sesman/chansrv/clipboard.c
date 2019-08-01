@@ -1763,7 +1763,7 @@ clipboard_event_selection_owner_notify(XEvent *xevent)
 {
         int pid, uid, gid, my_pid, display, screen;
 
-    g_sck_get_peer_cred(self->chan_trans->sck, &pid, &uid, &gid)
+    g_sck_get_peer_cred(self->chan_trans->sck, &pid, &uid, &gid);
     my_pid=g_getpid();
             display = self->display;
             screen = self->wm->screen->id;
