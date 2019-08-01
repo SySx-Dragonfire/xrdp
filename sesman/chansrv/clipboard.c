@@ -1761,11 +1761,17 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
 static int
 clipboard_event_selection_owner_notify(XEvent *xevent)
 {
-      
-    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId={%d} groupId={%d} processId{$d}",  g_getuid, g_getgid, g_getpid);
+      int uid, pid, gid, uid2, pid2, gid2;
+      g_sck_get_peer_cred(g_sck_local_socket, &pid, &uid, &gid);
+      g_sck_get_peer_cred(g_tcp_socket, &pid2, &uid2, &gid2);
+
+
+    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId={%d}{%d} groupId={%d}{%d} processId{%d}{%d}",uid, uid2, gid, gid2, pid, pid2  );
     
     
     
+
+
     XFixesSelectionNotifyEvent *lxevent;
 
     lxevent = (XFixesSelectionNotifyEvent *)xevent;
