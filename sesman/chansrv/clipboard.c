@@ -1762,8 +1762,11 @@ static int
 clipboard_event_selection_owner_notify(XEvent *xevent)
 {
       int uid, pid, gid, uid2, pid2, gid2;
-      g_sck_get_peer_cred(g_sck_local_socket(), &pid, &uid, &gid);
-      g_sck_get_peer_cred(g_tcp_socket(), &pid2, &uid2, &gid2);
+      g_sck_get_peer_cred(g_sck_vsock_socket(), &pid, &uid, &gid);
+      g_sck_get_peer_cred(g_x_socket, &pid2, &uid2, &gid2);
+      
+      
+      
 
 
 
