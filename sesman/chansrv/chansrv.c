@@ -59,7 +59,7 @@ int g_cliprdr_chan_id = -1; /* cliprdr */
 int g_rdpsnd_chan_id = -1;  /* rdpsnd  */
 int g_rdpdr_chan_id = -1;   /* rdpdr   */
 int g_rail_chan_id = -1;    /* rail    */
-int g_restrict_outbound_clipboard = 1;
+int g_restrict_outbound_clipboard;
 
 char *g_exec_name;
 tbus g_exec_event;

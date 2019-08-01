@@ -1761,9 +1761,17 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
 static int
 clipboard_event_selection_owner_notify(XEvent *xevent)
 {
-    if(g_restrict_outbound_clipboard){
-    log_message(LOG_LEVEL_INFO, "Clipboard event detected");
-    }
+        int pid, uid, gid, my_pid, display, screen;
+
+    g_sck_get_peer_cred(self->chan_trans->sck, &pid, &uid, &gid)
+    my_pid=g_getpid();
+            display = self->display;
+            screen = self->wm->screen->id;
+            log_message(LOG_LEVEL_INFO, "Clipboard event detected: xrdp_pid=%d disconnected xrdp-chansrv=%d X11rdp_uid=%d X11rdp_gid=%d client_ip=%s client_port=%s display=%d screen=%d",
+            my_pid, pid, uid, gid, self->wm->session->client_info->client_addr, self->wm->session->client_info->client_port, display, screen );
+     
+    //log_message(LOG_LEVEL_INFO, "Clipboard event detected");
+    
     XFixesSelectionNotifyEvent *lxevent;
 
     lxevent = (XFixesSelectionNotifyEvent *)xevent;
