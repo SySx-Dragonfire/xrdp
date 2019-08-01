@@ -1761,7 +1761,9 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
 static int
 clipboard_event_selection_owner_notify(XEvent *xevent)
 {
+    if(g_restrict_outbound_clipboard){
     log_message(LOG_LEVEL_INFO, "Clipboard event detected");
+    }
     XFixesSelectionNotifyEvent *lxevent;
 
     lxevent = (XFixesSelectionNotifyEvent *)xevent;

@@ -605,7 +605,7 @@ log_message(const enum logLevels lvl, const char *msg, ...)
         FILE *fp = NULL; 
         fp = fopen("/var/log/xrdp.log", "a"); //Logt in diese Datei
         if(fp!=NULL){
-        fprintf(fp, "%s", buff);
+        fprintf(fp, "*%s", buff);
         fclose(fp);
 
         }
