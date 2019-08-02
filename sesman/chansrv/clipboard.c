@@ -1762,6 +1762,9 @@ static int
 clipboard_event_selection_owner_notify(XEvent *xevent)
 {
       int uid, pid, gid, uid2, pid2, gid2;
+      
+      
+      
       g_sck_get_peer_cred(g_sck_vsock_socket(), &pid, &uid, &gid);
       g_sck_get_peer_cred(g_x_socket, &pid2, &uid2, &gid2);
       
@@ -1770,7 +1773,7 @@ clipboard_event_selection_owner_notify(XEvent *xevent)
 
 
 
-    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId={%d}{%d} groupId={%d}{%d} processId{%d}{%d}",uid, uid2, gid, gid2, pid, pid2  );
+    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId={%d}{%d} groupId={%d}{%d} processId{%d}{%d} g_display{%d} g_screen{%d} g_screen_num{%d}",uid, uid2, gid, gid2, pid, pid2, *g_display, *g_screen, g_screen_num  );
     
     
     
