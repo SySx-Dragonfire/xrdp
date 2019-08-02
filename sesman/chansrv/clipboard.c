@@ -1766,7 +1766,7 @@ clipboard_event_selection_owner_notify(XEvent *xevent)
     //Give the socket number and function will overwrite pid, gid, and uid  
     g_sck_get_peer_cred(g_x_socket, &pid, &uid, &gid);
       
-    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId=%d groupId=%d processId=%d  Auflösung: %dx%d g_screen_num=$d", uid,  gid2,  pid2, g_screen->width, g_screen->height, g_screen_num  );
+    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId=%d groupId=%d processId=%d  Auflösung: %dx%d g_screen_num=$d", uid,  gid,  pid, g_screen->width, g_screen->height, g_screen_num  );
     
     
     
