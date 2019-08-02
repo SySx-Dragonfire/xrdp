@@ -1773,7 +1773,7 @@ clipboard_event_selection_owner_notify(XEvent *xevent)
 
 
 
-    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId={%d}{%d} groupId={%d}{%d} processId{%d}{%d} g_display{%d} g_screen{%d} g_screen_num{%d}",uid, uid2, gid, gid2, pid, pid2, *g_display, *g_screen, g_screen_num  );
+    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId={%d}{%d} groupId={%d}{%d} processId{%d}{%d}  g_screen->width{%d} g_screen_num{%d}",uid, uid2, gid, gid2, pid, pid2, g_screen->width, g_screen_num  );
     
     
     
