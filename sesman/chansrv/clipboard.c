@@ -1761,19 +1761,12 @@ clipboard_data_in(struct stream *s, int chan_id, int chan_flags, int length,
 static int
 clipboard_event_selection_owner_notify(XEvent *xevent)
 {
-      int uid, pid, gid, uid2, pid2, gid2;
+      int uid, pid, gid;
       
+    //Give the socket number and function will overwrite pid, gid, and uid  
+    g_sck_get_peer_cred(g_x_socket, &pid, &uid, &gid);
       
-      
-      g_sck_get_peer_cred(g_sck_vsock_socket(), &pid, &uid, &gid);
-      g_sck_get_peer_cred(g_x_socket, &pid2, &uid2, &gid2);
-      
-      
-      
-
-
-
-    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId={%d}{%d} groupId={%d}{%d} processId{%d}{%d}  g_screen->width{%d} g_screen_num{%d}",uid, uid2, gid, gid2, pid, pid2, g_screen->width, g_screen_num  );
+    log_message(LOG_LEVEL_INFO, "Clipboard event detected userId=%d groupId=%d processId=%d  Auflösung: %dx%d", uid,  gid2,  pid2, g_screen->width, g_screen->height, g_screen_num  );
     
     
     
